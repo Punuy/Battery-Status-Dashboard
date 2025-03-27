@@ -3,67 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battery Status</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .status {
-            margin: 20px 0;
-            font-size: 1.2em;
-        }
-
-        .status div {
-            margin: 10px 0;
-        }
-    </style>
-</head>
+    <title>ggezwin</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 
 <body>
     <h1>Battery Status</h1>
 
     <div class="status">
         <div><strong>Battery Voltage:</strong> <span id="battery-voltage">Loading...</span> V</div>
-        <div><strong>Cell Voltage:</strong> <span id="cell-voltage">Loading...</span> V</div>
         <div><strong>Battery Current:</strong> <span id="battery-current">Loading...</span> A</div>
         <div><strong>Temperature:</strong> <span id="temperature">Loading...</span> °C</div>
+
+        
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-1">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-2">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-3">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-4">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-5">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-6">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-7">Loading...</span> V</div>
+        <div><strong>Cell Voltage:</strong> <span id="cell-voltage-8">Loading...</span> V</div>
     </div>
 
-    <script>
-        const socket = new WebSocket("ws://localhost:3001");
-
-        socket.onopen = () => {
-            console.log("Connected to WebSocket server.");
-        };
-
-        socket.onmessage = (event) => {
-            console.log("Received message from WebSocket:", event.data);  // Debugging line
-            try {
-                const data = JSON.parse(event.data);
-                console.log("Parsed data:", data);  // Debugging line
-
-                // Update the UI with the latest data
-                document.getElementById("battery-voltage").textContent = data.voltage.toFixed(2);
-                document.getElementById("cell-voltage").textContent = data.cell_voltage.toFixed(2);
-                document.getElementById("battery-current").textContent = data.current.toFixed(2);
-                document.getElementById("temperature").textContent = data.temperature.toFixed(2);
-            } catch (error) {
-                console.error("Error parsing WebSocket data:", error);
-            }
-        };
-
-        socket.onerror = (error) => {
-            console.error("WebSocket error:", error);
-        };
-
-        socket.onclose = () => {
-            console.log("WebSocket connection closed.");
-        };
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
