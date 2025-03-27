@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const wss = new WebSocket.Server({ port: 3001 });
 
-const MQTT_BROKER = "mqtt://--";
+const MQTT_BROKER = " ";
 const client = mqtt.connect(MQTT_BROKER);
 
 let batteryData = {
