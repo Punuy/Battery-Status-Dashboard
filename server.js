@@ -12,23 +12,40 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const wss = new WebSocket.Server({ port: 3001 });
 
-const MQTT_BROKER = "mqtt://ไม่บอก";
+const MQTT_BROKER = "mqtt://--";
 const client = mqtt.connect(MQTT_BROKER);
 
 let batteryData = {
     voltage: 0,
-    cell_voltage: 0,
     current: 0,
-    temperature: 0
+    temperature: 0,
+
+    cell_voltage_1: 0,
+    cell_voltage_2: 0,
+    cell_voltage_3: 0,
+    cell_voltage_4: 0,
+    cell_voltage_5: 0,
+    cell_voltage_6: 0,
+    cell_voltage_7: 0,
+    cell_voltage_8: 0
+
 };
 
 client.on("connect", () => {
     console.log(`Connected to ${MQTT_BROKER}`);
 
     client.subscribe("battery/voltage");
-    client.subscribe("battery/cell_voltage");
     client.subscribe("battery/current");
     client.subscribe("battery/temperature");
+
+    client.subscribe("battery/cell_voltage_1");
+    client.subscribe("battery/cell_voltage_2");
+    client.subscribe("battery/cell_voltage_3");
+    client.subscribe("battery/cell_voltage_4");
+    client.subscribe("battery/cell_voltage_5");
+    client.subscribe("battery/cell_voltage_6");
+    client.subscribe("battery/cell_voltage_7");
+    client.subscribe("battery/cell_voltage_8");
 });
 
 client.on("message", (topic, message) => {
@@ -38,14 +55,36 @@ client.on("message", (topic, message) => {
         case "battery/voltage":
             batteryData.voltage = value;
             break;
-        case "battery/cell_voltage":
-            batteryData.cell_voltage = value;
-            break;
         case "battery/current":
             batteryData.current = value;
             break;
         case "battery/temperature":
             batteryData.temperature = value;
+            break;
+
+        case "battery/cell_voltage_1":
+            batteryData.cell_voltage_1 = value;
+            break;
+        case "battery/cell_voltage_2":
+            batteryData.cell_voltage_2 = value;
+            break;
+        case "battery/cell_voltage_3":
+            batteryData.cell_voltage_3 = value;
+            break;
+        case "battery/cell_voltage_4":
+            batteryData.cell_voltage_4 = value;
+            break;
+        case "battery/cell_voltage_5":
+            batteryData.cell_voltage_5 = value;
+            break;
+        case "battery/cell_voltage_6":
+            batteryData.cell_voltage_6 = value;
+            break;
+        case "battery/cell_voltage_7":
+            batteryData.cell_voltage_7 = value;
+            break;
+        case "battery/cell_voltage_8":
+            batteryData.cell_voltage_8 = value;
             break;
     }
 
