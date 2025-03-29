@@ -20,6 +20,12 @@ let batteryData = {
     current: 0,
     temperature: 0,
 
+    s_voltage: 0,
+    s_current: 0,
+    s_temperature: 0,
+    s_capacity: 0,
+    s_cellbalance: 0,
+
     cell_voltage_1: 0,
     cell_voltage_2: 0,
     cell_voltage_3: 0,
@@ -28,7 +34,6 @@ let batteryData = {
     cell_voltage_6: 0,
     cell_voltage_7: 0,
     cell_voltage_8: 0
-
 };
 
 client.on("connect", () => {
@@ -37,6 +42,13 @@ client.on("connect", () => {
     client.subscribe("battery/voltage");
     client.subscribe("battery/current");
     client.subscribe("battery/temperature");
+    client.subscribe("battery/capacity");
+
+    client.subscribe("battery/s_voltage");
+    client.subscribe("battery/s_current");
+    client.subscribe("battery/s_temperature");
+    client.subscribe("battery/s_capacity");
+    client.subscribe("battery/s_cellbalance");
 
     client.subscribe("battery/cell_voltage_1");
     client.subscribe("battery/cell_voltage_2");
@@ -60,6 +72,22 @@ client.on("message", (topic, message) => {
             break;
         case "battery/temperature":
             batteryData.temperature = value;
+            break;
+
+        case "battery/s_voltage":
+            batteryData.s_voltage = value;
+            break;
+        case "battery/s_current":
+            batteryData.s_current = value;
+            break;
+        case "battery/s_temperature":
+            batteryData.s_temperature = value;
+            break;
+        case "battery/s_capacity":
+            batteryData.s_capacity = value;
+            break;
+        case "battery/s_cellbalance":
+            batteryData.s_cellbalance = value;
             break;
 
         case "battery/cell_voltage_1":
