@@ -1,4 +1,5 @@
-const socket = new WebSocket("ws://localhost:3001"); 
+const socket = new WebSocket("ws://localhost:3001");
+
 
     socket.onopen = () => {
         console.log("Connected to WebSocket server.");
@@ -21,7 +22,7 @@ socket.onmessage = (event) => {
         document.getElementById("battery-current-status").textContent = currentText; 
 
         document.getElementById("temperature").textContent = data.temperature.toFixed(2) + " °C";
-        document.getElementById("capacity").textContent = data.temperature.toFixed(2) + "%";
+        document.getElementById("capacity").textContent = data.capacity.toFixed(2) + "%";
 
         const minVoltage = 2.6;
         const maxVoltage = 3.4;
