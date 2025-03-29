@@ -19,6 +19,7 @@ let batteryData = {
     voltage: 0,
     current: 0,
     temperature: 0,
+    capacity: 0,
 
     s_voltage: 0,
     s_current: 0,
@@ -72,6 +73,9 @@ client.on("message", (topic, message) => {
             break;
         case "battery/temperature":
             batteryData.temperature = value;
+            break;
+        case "battery/capacity":
+            batteryData.capacity = value;
             break;
 
         case "battery/s_voltage":
